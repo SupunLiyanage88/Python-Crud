@@ -1,21 +1,110 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-    {% for note in user.notes %}
-    <li class="list-group-item">{{ note.data }}
-        <button type="button" class="close" onclick="deleteNote({{note.id}})">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </li>
-    {% endfor %}
-</ul>
-<form method="POST">
-    <textarea name="note" id="note" class="form-control"></textarea>
-    <br/>
-    <div align="center" >
-        <button type="submit" class="btn btn-primary">Add Note</button>
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-6 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">My Notes</h1>
+                <p class="text-gray-600 mt-1">Capture your thoughts and ideas</p>
+            </div>
+            <div class="bg-blue-50 rounded-lg px-4 py-2">
+                <span class="text-sm text-gray-600">Total Notes: </span>
+                <span class="text-lg font-semibold text-blue-600">{{ user.notes|length }}</span>
+            </div>
+        </div>
+
+        <!-- Add Note Form -->
+        <form method="POST" class="bg-white shadow-lg rounded-xl p-6 mb-8">
+            <div class="mb-4">
+                <div class="flex items-center mb-3">
+                    <svg class="h-5 w-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    <label for="note" class="block text-sm font-medium text-gray-700">Create a New Note</label>
+                </div>
+                <textarea 
+                    name="note" 
+                    id="note" 
+                    rows="3" 
+                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 resize-none text-gray-700"
+                    placeholder="What's on your mind?"
+                ></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button 
+                    type="submit" 
+                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                >
+                    <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Note
+                </button>
+            </div>
+        </form>
+
+        <!-- Notes Grid -->
+        <div class="grid gap-4 sm:grid-cols-2 mb-8" id="notes">
+            {% for note in user.notes %}
+            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden group">
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1 mr-4">
+                            <p class="text-gray-800">{{ note.data }}</p>
+                            <p class="text-xs text-gray-500 mt-2">Created on {{ note.date.strftime('%B %d, %Y') if note.date }}</p>
+                        </div>
+                        <button 
+                            type="button" 
+                            class="text-gray-400 hover:text-red-500 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                            onclick="deleteNote({{note.id}})"
+                        >
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-6 py-2">
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            Note #{{ loop.index }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Empty State -->
+        {% if not user.notes %}
+        <div class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No notes</h3>
+            <p class="mt-1 text-sm text-gray-500">Get started by creating a new note</p>
+        </div>
+        {% endif %}
     </div>
-</form>
+</div>
+
+<script>
+function deleteNote(noteId) {
+    fetch("/delete-note", {
+        method: "POST",
+        body: JSON.stringify({ noteId: noteId }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then((_res) => {
+        window.location.href = "/";
+    });
+}
+</script>
 {% endblock %}
