@@ -78,7 +78,7 @@ This is a simple CRUD application built with Flask, designed for developers to e
 
 ![Application Screenshot](https://drive.google.com/file/d/1uwJDGpIIOxeMHNVoWDS0_MlG3uacUQfZ/view?usp=drive_link)
 
-Replace `path/to/your/screenshot.png` with the actual path to your image. You can upload the screenshot to your GitHub repository and use the relative path, or you can host the image elsewhere and provide the URL.
+Replace `(https://github.com/SupunLiyanage88/Python-Crud/blob/fea29fcbc35874a966acbc53517d2ddca4d093d8/Screenshot%202025-01-21%20120115.png)` with the actual path to your image. You can upload the screenshot to your GitHub repository and use the relative path, or you can host the image elsewhere and provide the URL.
 
 ---
 
