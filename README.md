@@ -76,7 +76,7 @@ This is a simple CRUD application built with Flask, designed for developers to e
 
 ## Example Screenshot
 
-![Application Screenshot](https://github.com/SupunLiyanage88/Python-Crud/blob/fea29fcbc35874a966acbc53517d2ddca4d093d8/Screenshot%202025-01-21%20120115.png)
+![Application Screenshot](![Image]![Image](https://github.com/user-attachments/assets/accfc381-e125-4eda-87b1-a1e5078ab31e)
 ![Application Screenshot](https://github.com/SupunLiyanage88/Python-Crud/blob/5126210cf25a1eedbf250e8668362d6d92b39e8d/Screenshot%202025-01-21%20121240.png)
 
 
