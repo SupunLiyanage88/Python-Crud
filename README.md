@@ -76,7 +76,7 @@ This is a simple CRUD application built with Flask, designed for developers to e
 
 ## Example Screenshot
 
-![Application Screenshot](path/to/your/screenshot.png)
+![Application Screenshot](https://drive.google.com/file/d/1uwJDGpIIOxeMHNVoWDS0_MlG3uacUQfZ/view?usp=drive_link)
 
 Replace `path/to/your/screenshot.png` with the actual path to your image. You can upload the screenshot to your GitHub repository and use the relative path, or you can host the image elsewhere and provide the URL.
 
