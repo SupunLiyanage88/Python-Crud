@@ -41,13 +41,36 @@ def edit_note():
         return jsonify({"success": False, "error": str(e)}), 500
 
 @views.route('/delete-note', methods=['POST'])
+@login_required  # Added login_required decorator
 def delete_note():  
-    note = json.loads(request.data)
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
-
-    return jsonify({})
+    try:
+        note_data = json.loads(request.data)
+        note_id = note_data['noteId']
+        note = Note.query.get(note_id)
+        
+        if not note:
+            return jsonify({
+                "success": False,
+                "message": "Note not found!"
+            }), 404
+            
+        if note.user_id != current_user.id:
+            return jsonify({
+                "success": False,
+                "message": "Unauthorized access!"
+            }), 403
+            
+        db.session.delete(note)
+        db.session.commit()
+        flash('Note deleted successfully!', category='warning')
+        
+        return jsonify({
+            "success": True,
+            "message": "Note deleted successfully!"
+        })
+        
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": str(e)
+        }), 500

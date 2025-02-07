@@ -29,7 +29,7 @@
                     name="note" 
                     id="note" 
                     rows="3" 
-                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 resize-none text-gray-700"
+                    class="block w-full rounded-lg p-3 border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 resize-none text-gray-700"
                     placeholder="What's on your mind?"
                 ></textarea>
             </div>
@@ -49,7 +49,7 @@
         <!-- Notes Grid -->
         <div class="grid gap-4 sm:grid-cols-2 mb-8" id="notes">
             {% for note in user.notes %}
-            <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden group">
+            <div class="bg-white rounded-xl shadow-lg hover:shadow-md transition-shadow duration-200 overflow-hidden group">
                 <div class="p-6">
                     <div class="flex justify-between items-start">
                         <div class="flex-1 mr-4">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="note-edit hidden" id="edit-{{note.id}}">
                                 <textarea
-                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 resize-none text-gray-700"
+                                    class="block w-full rounded-lg p-3 border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 resize-none text-gray-700"
                                     rows="3"
                                 >{{ note.data }}</textarea>
                                 <div class="flex justify-end mt-2 space-x-2">
